@@ -31,7 +31,7 @@ export const CategoryList = async ({ className, style }: CategoryListProps) => {
         <ul>
           {categories?.menu.lobby.items.map((category) => (
             <li key={category.id}>
-              <Link href={category.name.en} key={category.id}>
+              <Link href={category.name.en === 'Lobby' ? '/' : category.name.en} key={category.id}>
                 {category.name.en}
               </Link>
             </li>

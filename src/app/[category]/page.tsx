@@ -19,22 +19,17 @@ export const generateStaticParams = async () => {
   })) || [];
 }
 
-const Page = async ({ params, searchParams }: PageProps) => {
+const Page = async ({ params }: PageProps) => {
 
   const { category } = await params;
-  const { search } = await searchParams;
 
   const decodedCategory = decodeURIComponent(category);
 
-  return (
-    <>
-      <h2>Available Games</h2>
-      <Suspense
-        fallback={<p>Loading games...</p>}
-      >
-        <GameCardByCategory category={decodedCategory} search={search}/>
-      </Suspense>
-    </>
+  return (<Suspense
+      fallback={<p>Loading games...</p>}
+    >
+      <GameCardByCategory category={decodedCategory}/>
+    </Suspense>
   );
 };
 

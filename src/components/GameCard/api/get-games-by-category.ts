@@ -8,7 +8,7 @@ interface GetGamesByCategoryProps {
 }
 
 interface GetGamesByCategoryResponse {
-  meta: Record<string, unknown>
+  meta: {title: string }
   components: {
     games: {
       gameText: string
