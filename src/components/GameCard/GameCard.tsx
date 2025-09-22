@@ -20,18 +20,11 @@ export interface Game {
 }
 
 interface GameCardProps {
-  category?: string
   search?: string
 }
 
-export const GameCard = async ({ category, search }: GameCardProps) => {
+export const GameCard = async ({ search }: GameCardProps) => {
   const { data: games } = await getGames({search})
-
-  const filteredGames = games?.items.filter(game => {
-      if (!category || category.toLowerCase() === 'all games') return true
-      return game.meta.category.toLowerCase().includes(category.toLowerCase())
-    }
-  ) || []
 
   return (
     <div className={styles.eventFeed}>
@@ -43,11 +36,11 @@ export const GameCard = async ({ category, search }: GameCardProps) => {
         <h3>Game Cards</h3>
         <Search/>
       </div>
-      {filteredGames.length === 0 ? (
+      {games?.count === 0 ? (
         <p>No games available</p>
       ) : (
         <ul className={styles.eventList}>
-          {filteredGames.map((game) => {
+          {games?.items.map((game) => {
             return <li key={game.id} className={styles.eventItem}>
               <div className={styles.gameCard}>
                 <img

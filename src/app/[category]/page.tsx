@@ -1,5 +1,5 @@
 import { getConfig } from "@/components/CategoryList/api/get-config";
-import { GameCard } from "@/components/GameCard/GameCard";
+import { GameCardByCategory } from "@/components/GameCard/GameCardByCategory";
 import React, { Suspense } from 'react';
 
 interface PageProps {
@@ -32,7 +32,7 @@ const Page = async ({ params, searchParams }: PageProps) => {
       <Suspense
         fallback={<p>Loading games...</p>}
       >
-        <GameCard category={decodedCategory} search={search}/>
+        <GameCardByCategory category={decodedCategory} search={search}/>
       </Suspense>
     </>
   );

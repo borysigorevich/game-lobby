@@ -1,6 +1,5 @@
 import { CategoryList } from "@/components/CategoryList/CategoryList";
 import { GameEvents } from "@/components/GameEvents/GameEvents";
-import Link from "next/link";
 import React, { PropsWithChildren, Suspense } from 'react';
 
 const Layout = ({ children }: PropsWithChildren) => {
@@ -8,7 +7,7 @@ const Layout = ({ children }: PropsWithChildren) => {
     <html>
     <body>
     <div style={{ padding: "2rem" }}>
-      <Link href={'/'}><h1>Casino Games Lobby</h1></Link>
+      <h1>Casino Games Lobby</h1>
       <Suspense
         fallback={<p>Loading categories...</p>}
       >

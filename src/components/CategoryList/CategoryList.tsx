@@ -14,6 +14,9 @@ export interface Category {
     pt: string;
   };
   type: string;
+  links: {
+    getPage: Record<string, string>
+  }
 }
 
 export const CategoryList = async ({ className, style }: CategoryListProps) => {
