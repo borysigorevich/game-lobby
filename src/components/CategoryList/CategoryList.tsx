@@ -1,4 +1,4 @@
-import { getCategories } from "@/components/CategoryList/api/get-categories";
+import { getConfig } from "@/components/CategoryList/api/get-config";
 import Link from "next/link";
 import { CSSProperties } from 'react';
 
@@ -17,7 +17,7 @@ export interface Category {
 }
 
 export const CategoryList = async ({ className, style }: CategoryListProps) => {
-  const { data: categories, error } = await getCategories()
+  const { data: categories, error } = await getConfig()
 
   return (
     <div className={className} style={style}>

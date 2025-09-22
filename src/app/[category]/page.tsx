@@ -1,4 +1,4 @@
-import { getCategories } from "@/components/CategoryList/api/get-categories";
+import { getConfig } from "@/components/CategoryList/api/get-config";
 import { GameCard } from "@/components/GameCard/GameCard";
 import React, { Suspense } from 'react';
 
@@ -12,7 +12,7 @@ interface PageProps {
 }
 
 export const generateStaticParams = async () => {
-  const { data: categories } = await getCategories()
+  const { data: categories } = await getConfig()
 
   return categories?.menu.lobby.items.map((category) => ({
     category: encodeURIComponent(category.name.en),
