@@ -1,41 +1,51 @@
-'use client'
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useOptimistic, useTransition } from 'react';
+'use client';
+
+import { useEffect, useMemo, useState, useTransition } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+export const useDebouncedValue = <T,>(value: T, delay = 400) => {
+  const [debounced, setDebounced] = useState(value);
+
+  useEffect(() => {
+    const id = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(id);
+  }, [value, delay]);
+
+  return debounced;
+};
 
 export const Search = () => {
-
-  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const [pending, startTransition] = useTransition();
+  const searchParams = useSearchParams();
 
-  const query = searchParams.get('search') || '';
+  const initial = searchParams.get('search') ?? '';
+  const [query, setQuery] = useState(initial);
 
-  const [optimisticQuery, setOptimisticQuery] = useOptimistic(query);
+  const debouncedQuery = useDebouncedValue(query, 200);
+  const [isPending, startTransition] = useTransition();
 
-  const onChange = (value: string) => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    if (value) {
-      newSearchParams.set('search', value);
-    } else {
-      newSearchParams.delete('search');
-    }
+  const baseParams = useMemo(() => new URLSearchParams(searchParams.toString()), [pathname]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(baseParams.toString());
+
+    if (debouncedQuery) params.set('search', debouncedQuery);
+    else params.delete('search');
 
     startTransition(() => {
-      router.push(`${pathname}?${newSearchParams.toString()}`, {
-        scroll: false,
-      });
-      setOptimisticQuery(value);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     });
-  };
+  }, [debouncedQuery, pathname]);
 
   return (
     <input
       type="text"
-      value={optimisticQuery}
-      onChange={(e) => onChange(e.target.value)}
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
       placeholder="Search..."
       className="border p-2 rounded"
+      aria-busy={isPending}
     />
   );
 };
