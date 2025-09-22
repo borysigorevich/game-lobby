@@ -6,9 +6,10 @@ import React from 'react';
 
 interface GameCardByCategoryProps {
   category?: string
+  search?: string
 }
 
-export const GameCardByCategory = async ({ category }: GameCardByCategoryProps) => {
+export const GameCardByCategory = async ({ category, search }: GameCardByCategoryProps) => {
 
   const { data: config } = await getConfig()
 
@@ -22,6 +23,8 @@ export const GameCardByCategory = async ({ category }: GameCardByCategoryProps) 
 
   const gameList = games?.components?.[0].games || []
 
+  const filteredGames = search ? gameList.filter(game => game.gameText.toLowerCase().includes(search.toLowerCase())) : gameList
+
   return (
     <>
       <h2>{games?.meta.title}</h2>
@@ -32,12 +35,13 @@ export const GameCardByCategory = async ({ category }: GameCardByCategoryProps) 
           alignItems: "center",
         }}>
           <h3>Game Cards</h3>
+          <Search/>
         </div>
-        {gameList?.length === 0 ? (
+        {filteredGames?.length === 0 ? (
           <p>No games available</p>
         ) : (
           <ul className={styles.eventList}>
-            {gameList.map((game) => {
+            {filteredGames.map((game) => {
 
               return <li key={game.id} className={styles.eventItem}>
                 <div className={styles.gameCard}>
