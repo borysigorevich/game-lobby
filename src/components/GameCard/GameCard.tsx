@@ -33,8 +33,6 @@ export const GameCard = async ({ category, search }: GameCardProps) => {
     }
   ) || []
 
-  console.log('game list render')
-
   return (
     <div className={styles.eventFeed}>
       <div style={{
