@@ -1,7 +1,15 @@
 import { GameCard } from "@/components/GameCard/GameCard";
 import React, { Suspense } from 'react';
 
-const Page = async () => {
+interface PageProps {
+  searchParams: Promise<{
+    search: string;
+  }>
+}
+
+const Page = async ({searchParams}: PageProps) => {
+
+  const { search } = await searchParams
 
   return (
     <>
@@ -9,7 +17,7 @@ const Page = async () => {
       <Suspense
         fallback={<p>Loading games...</p>}
       >
-        <GameCard/>
+        <GameCard search={search}/>
       </Suspense>
     </>
   )

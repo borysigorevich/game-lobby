@@ -19,8 +19,6 @@ export interface Category {
 export const CategoryList = async ({ className, style }: CategoryListProps) => {
   const { data: categories, error } = await getCategories()
 
-  console.log({ categories })
-
   return (
     <div className={className} style={style}>
       <h2>Game Categories</h2>

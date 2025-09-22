@@ -6,11 +6,16 @@ interface GetGamesResponse {
   count: number
 }
 
-export const getGames = async () => {
+interface GetGamesProps {
+  search?: string
+}
+
+export const getGames = async ({search}: GetGamesProps = {}) => {
   try {
     const response = await apiFetch<GetGamesResponse>('/en/games', {
       searchParams: {
-        pageSize: '100'
+        pageSize: '100',
+        search
       }
     })
 

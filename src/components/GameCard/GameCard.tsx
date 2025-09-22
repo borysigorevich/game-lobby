@@ -1,4 +1,5 @@
 import { getGames } from "@/components/GameCard/api/get-games";
+import { Search } from "@/components/GameCard/Search.client";
 import React from 'react'
 
 import styles from '../../styles/EventFeed.module.css'
@@ -20,10 +21,11 @@ export interface Game {
 
 interface GameCardProps {
   category?: string
+  search?: string
 }
 
-export const GameCard = async ({ category }: GameCardProps) => {
-  const { data: games } = await getGames()
+export const GameCard = async ({ category, search }: GameCardProps) => {
+  const { data: games } = await getGames({search})
 
   const filteredGames = games?.items.filter(game => {
       if (!category || category.toLowerCase() === 'all games') return true
@@ -31,16 +33,23 @@ export const GameCard = async ({ category }: GameCardProps) => {
     }
   ) || []
 
+  console.log('game list render')
+
   return (
     <div className={styles.eventFeed}>
-      <h3>Game Cards</h3>
+      <div style={{
+        display: "flex",
+        gap: 24,
+        alignItems: "center",
+      }}>
+        <h3>Game Cards</h3>
+        <Search/>
+      </div>
       {filteredGames.length === 0 ? (
         <p>No games available</p>
       ) : (
         <ul className={styles.eventList}>
           {filteredGames.map((game) => {
-
-            console.log({ gameMeta: game.meta }, '***')
             return <li key={game.id} className={styles.eventItem}>
               <div className={styles.gameCard}>
                 <img

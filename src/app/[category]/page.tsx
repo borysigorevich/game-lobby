@@ -5,6 +5,9 @@ import React, { Suspense } from 'react';
 interface PageProps {
   params: Promise<{
     category: string;
+  }>,
+  searchParams: Promise<{
+    search: string;
   }>
 }
 
@@ -16,9 +19,10 @@ export const generateStaticParams = async () => {
   })) || [];
 }
 
-const Page = async ({ params }: PageProps) => {
+const Page = async ({ params, searchParams }: PageProps) => {
 
   const { category } = await params;
+  const { search } = await searchParams;
 
   const decodedCategory = decodeURIComponent(category);
 
@@ -28,7 +32,7 @@ const Page = async ({ params }: PageProps) => {
       <Suspense
         fallback={<p>Loading games...</p>}
       >
-        <GameCard category={decodedCategory}/>
+        <GameCard category={decodedCategory} search={search}/>
       </Suspense>
     </>
   );
