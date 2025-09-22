@@ -1,4 +1,6 @@
-import React from 'react';
+import { getCategories } from "@/components/CategoryList/api/get-categories";
+import { GameCard } from "@/components/GameCard/GameCard";
+import React, { Suspense } from 'react';
 
 interface PageProps {
   params: Promise<{
@@ -6,14 +8,29 @@ interface PageProps {
   }>
 }
 
-const Page = async ({params}: PageProps) => {
+export const generateStaticParams = async () => {
+  const { data: categories } = await getCategories()
+
+  return categories?.menu.lobby.items.map((category) => ({
+    category: encodeURIComponent(category.name.en),
+  })) || [];
+}
+
+const Page = async ({ params }: PageProps) => {
 
   const { category } = await params;
 
+  const decodedCategory = decodeURIComponent(category);
+
   return (
-    <div>
-      {decodeURIComponent(category)}
-    </div>
+    <>
+      <h2>Available Games</h2>
+      <Suspense
+        fallback={<p>Loading games...</p>}
+      >
+        <GameCard category={decodedCategory}/>
+      </Suspense>
+    </>
   );
 };
 
