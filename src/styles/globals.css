@@ -54,7 +54,8 @@ ul {
 }
 
 .main {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     padding: 32px 0 0 32px;
     overflow: auto;
     grid-template-rows: auto 1fr;

@@ -1,9 +1,38 @@
 .gamesList {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: 1fr;
     gap: 20px;
+    height: fit-content;
+    max-height: 100%;
     overflow: auto;
     padding-right: 32px;
     margin-top: 20px;
     padding-bottom: 16px;
+}
+
+@media (min-width: 640px) {
+    .gamesList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (min-width: 768px) {
+    .gamesList {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .gamesList {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+@media (min-width: 1280px) {
+    .gamesList {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
