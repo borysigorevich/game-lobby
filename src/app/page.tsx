@@ -16,17 +16,15 @@ const Page = async ({ searchParams }: PageProps) => {
   const { data: games } = await getGames({ search })
 
   return (
-    <div>
+    <>
       <GameHeader
         title="Casino games lobby"
         totalGames={games?.items.length || 0}
       />
-
       <GamesList
         games={games}
       />
-
-    </div>
+    </>
   )
 };
 

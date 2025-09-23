@@ -25,8 +25,6 @@ export interface Category {
 export const CategoryList = async ({ className, style }: CategoryListProps) => {
   const { data: categories, error } = await getConfig()
 
-  console.log({ categories })
-
   return (
     <div className={`${s.categoryList} ${className}`} style={style}>
       <h3 className={s.categoryListTitle}>Categories</h3>

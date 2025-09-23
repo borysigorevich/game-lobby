@@ -35,6 +35,11 @@ button {
     cursor: pointer;
 }
 
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 .wrapper {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -45,8 +50,14 @@ button {
     display: grid;
     grid-template-columns: 256px 1fr;
     height: 100%;
+    overflow: auto;
 }
 
 .main {
-    padding: 32px;
+    display: grid;
+    padding: 32px 0 0 32px;
+    overflow: auto;
+    grid-template-rows: auto 1fr;
+    position: relative;
+    isolation: isolate;
 }

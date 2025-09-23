@@ -1,6 +1,7 @@
 import { GetGamesResponse } from "@/components/GameCard/api/get-games";
 import { GameCard } from "@/components/GameCard/GameCard";
 import React from 'react';
+
 import s from './games-list.module.css'
 
 interface GamesListProps {
@@ -9,11 +10,11 @@ interface GamesListProps {
 
 export const GamesList = ({ games }: GamesListProps) => {
   return (
-    <div className={s.gamesList}>
+    <>
       {games?.count === 0 ? (
         <p>No games available</p>
       ) : (
-        <ul>
+        <ul className={s.gamesList}>
           {games?.items.map((game) => {
             return <GameCard
               game={game} key={game.id}
@@ -21,6 +22,6 @@ export const GamesList = ({ games }: GamesListProps) => {
           })}
         </ul>
       )}
-    </div>
+    </>
   );
 };

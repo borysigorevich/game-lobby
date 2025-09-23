@@ -1,0 +1,26 @@
+.gameCard {
+    border-radius: 20px;
+    /*overflow: hidden;*/
+    display: grid;
+    grid-template-rows: 1fr auto
+}
+
+.gameCardImage {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.gameCardBottom {
+    padding: 15px;
+    background-color: var(--primary-bg);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.gameCardTitle {
+    font-weight: 600;
+    font-size: 1rem;
+}

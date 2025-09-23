@@ -1,4 +1,5 @@
 import { CategoryList } from "@/components/CategoryList/CategoryList";
+import { GridOverlay } from "@/components/GridOverlay/GridOverlay";
 import { Header } from "@/components/Header/Header";
 
 import '../styles/globals.css';
@@ -26,7 +27,10 @@ const Layout = ({ children }: PropsWithChildren) => {
             <CategoryList/>
           </Suspense>
         </Sidebar>
-        <main className={'main'}>{children}</main>
+        <main className={'main'}>
+          {children}
+          <GridOverlay/>
+        </main>
       </div>
     </div>
     </body>
