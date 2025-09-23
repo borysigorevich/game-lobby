@@ -1,7 +1,21 @@
-import { Game } from "@/components/GameCard/GameCard";
 import { apiFetch } from "@/services/api-fetch";
 
-interface GetGamesResponse {
+export interface Game {
+  id: string
+  meta: {
+    name: string
+    category: string
+  }
+  media: {
+    thumbnail: {
+      thumbnail: {
+        src: string
+      }
+    }
+  }
+}
+
+export interface GetGamesResponse {
   items: Game[]
   count: number
 }

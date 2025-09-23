@@ -4,6 +4,9 @@
     --accent: #D5FE00;
 
     --border: #374151;
+
+    --input-bg: #324B53;
+    --input-placeholder-color: #9CA3AF;
 }
 
 html, body {
@@ -22,6 +25,10 @@ h1, h2, h3, h4 {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+img {
+    display: block;
 }
 
 button {

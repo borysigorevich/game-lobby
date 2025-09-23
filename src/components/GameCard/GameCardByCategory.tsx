@@ -1,6 +1,6 @@
 import { getConfig } from "@/components/CategoryList/api/get-config";
 import { getGamesByCategory } from "@/components/GameCard/api/get-games-by-category";
-import { Search } from "@/components/GameCard/Search.client";
+import { Search } from "@/components/GameCard/components/Search.client";
 import styles from "@/styles/EventFeed.module.css";
 import React from 'react';
 

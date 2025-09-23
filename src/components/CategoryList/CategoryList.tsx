@@ -1,5 +1,5 @@
 import { getConfig } from "@/components/CategoryList/api/get-config";
-import { ActiveLink } from "@/components/CategoryList/components/ActiveLink/ActiveLink";
+import { ActiveLink } from "@/components/CategoryList/components/ActiveLink/ActiveLink.client";
 import Link from "next/link";
 import { CSSProperties } from 'react';
 

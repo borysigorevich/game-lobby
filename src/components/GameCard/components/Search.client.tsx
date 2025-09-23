@@ -1,9 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState, useTransition } from 'react';
+import { SearchIcon } from "@/components/svg/SearchIcon";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useMemo, useState, useTransition } from 'react';
 
-export const useDebouncedValue = <T,>(value: T, delay = 400) => {
+import s from './search.module.css'
+
+export const useDebouncedValue = <T, >(value: T, delay = 400) => {
   const [debounced, setDebounced] = useState(value);
 
   useEffect(() => {
@@ -39,13 +42,16 @@ export const Search = () => {
   }, [debouncedQuery, pathname]);
 
   return (
-    <input
-      type="text"
-      value={query}
-      onChange={(e) => setQuery(e.target.value)}
-      placeholder="Search..."
-      className="border p-2 rounded"
-      aria-busy={isPending}
-    />
+    <label className={s.search}>
+      <SearchIcon/>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search game"
+        className={s.searchInput}
+        aria-busy={isPending}
+      />
+    </label>
   );
 };

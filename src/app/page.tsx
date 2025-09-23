@@ -1,5 +1,7 @@
-import { GameCard } from "@/components/GameCard/GameCard";
-import React, { Suspense } from 'react';
+import { getGames } from "@/components/GameCard/api/get-games";
+import { GameHeader } from "@/components/GameHeader/GameHeader";
+import { GamesList } from "@/components/GamesList/GamesList";
+import React from 'react';
 
 interface PageProps {
   searchParams: Promise<{
@@ -11,14 +13,19 @@ const Page = async ({ searchParams }: PageProps) => {
 
   const { search } = await searchParams
 
+  const { data: games } = await getGames({ search })
+
   return (
     <div>
-      <h2>Available Games</h2>
-      <Suspense
-        fallback={<p>Loading games...</p>}
-      >
-        <GameCard search={search}/>
-      </Suspense>
+      <GameHeader
+        title="Casino games lobby"
+        totalGames={games?.items.length || 0}
+      />
+
+      <GamesList
+        games={games}
+      />
+
     </div>
   )
 };
