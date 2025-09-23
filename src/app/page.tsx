@@ -1,4 +1,5 @@
-import { getGames } from "@/components/GameCard/api/get-games";
+import { getGames } from "@/app/_api/get-games";
+import { GameCard } from "@/components/GameCard/GameCard";
 import { GameHeader } from "@/components/GameHeader/GameHeader";
 import { GamesList } from "@/components/GamesList/GamesList";
 import React from 'react';
@@ -21,9 +22,17 @@ const Page = async ({ searchParams }: PageProps) => {
         title="Casino games lobby"
         totalGames={games?.items.length || 0}
       />
-      <GamesList
-        games={games}
-      />
+      {games?.count === 0 ? <p>No games available</p> :
+        <GamesList
+          content={games?.items.map((game) => {
+            return <GameCard
+              key={game.id}
+              src={game.media.thumbnail.thumbnail.src}
+              alt={game.meta.name}
+              name={game.meta.name}
+            />
+          })}
+        />}
     </>
   )
 };

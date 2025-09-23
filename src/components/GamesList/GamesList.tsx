@@ -1,27 +1,15 @@
-import { GetGamesResponse } from "@/components/GameCard/api/get-games";
-import { GameCard } from "@/components/GameCard/GameCard";
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import s from './games-list.module.css'
 
 interface GamesListProps {
-  games?: GetGamesResponse
+  content: ReactNode
 }
 
-export const GamesList = ({ games }: GamesListProps) => {
+export const GamesList = ({ content }: GamesListProps) => {
   return (
-    <>
-      {games?.count === 0 ? (
-        <p>No games available</p>
-      ) : (
-        <ul className={s.gamesList}>
-          {games?.items.map((game) => {
-            return <GameCard
-              game={game} key={game.id}
-            />
-          })}
-        </ul>
-      )}
-    </>
+    <ul className={s.gamesList}>
+      {content}
+    </ul>
   );
 };

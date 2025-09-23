@@ -1,26 +1,29 @@
-import { Game } from "@/components/GameCard/api/get-games";
 import Image from "next/image";
 import React from 'react'
 
 import s from './game-card.module.css'
 
 interface GameCardProps {
-  game: Game
+  src: string
+  alt: string
+  name: string
 }
 
-export const GameCard = async ({ game }: GameCardProps) => {
-
+export const GameCard = async (
+  {
+    src, alt, name
+  }: GameCardProps) => {
   return (
-    <li key={game.id} className={s.gameCard}>
+    <li className={s.gameCard}>
       <Image
-        src={game.media.thumbnail.thumbnail.src}
-        alt={game.meta.name}
+        src={src}
+        alt={alt}
         className={s.gameCardImage}
         width={250}
         height={300}
       />
       <div className={s.gameCardBottom}>
-        <span className={s.eventMessage}>{game.meta.name}</span>
+        <span className={s.eventMessage}>{name}</span>
       </div>
     </li>
   )

@@ -1,6 +1,9 @@
 import { getConfig } from "@/components/CategoryList/api/get-config";
-import { GameCardByCategory } from "@/components/GameCard/GameCardByCategory";
-import React, { Suspense } from 'react';
+import { getGamesByCategory } from "@/app/[category]/_api/get-games-by-category";
+import { GameCard } from "@/components/GameCard/GameCard";
+import { GameHeader } from "@/components/GameHeader/GameHeader";
+import { GamesList } from "@/components/GamesList/GamesList";
+import React from 'react';
 
 interface PageProps {
   params: Promise<{
@@ -26,12 +29,39 @@ const Page = async ({ params, searchParams }: PageProps) => {
 
   const decodedCategory = decodeURIComponent(category);
 
-  return (<Suspense
-      fallback={<p>Loading games...</p>}
-    >
-      <GameCardByCategory category={decodedCategory} search={search}/>
-    </Suspense>
-  );
+  const { data: config } = await getConfig()
+
+  const link = config?.menu.lobby.items.find(cat => cat.name.en.toLowerCase() === decodedCategory?.toLowerCase())
+
+  const categoryUrl = link ? link.links.getPage.en : undefined
+
+  if (!categoryUrl) return <p>Category not found</p>
+
+  const { data: games } = await getGamesByCategory({ url: categoryUrl })
+
+  if (!games) return <p>No games available</p>
+
+  const gameList = games?.components?.[0].games || []
+
+  const filteredGames = search ? gameList.filter(game => game.gameText.toLowerCase().includes(search.toLowerCase())) : gameList
+
+  return <>
+    <GameHeader
+      title="Casino games lobby"
+      totalGames={filteredGames.length || 0}
+    />
+    {gameList?.length === 0 ? <p>No games available</p> :
+      <GamesList
+        content={filteredGames.map((game) => {
+          return <GameCard
+            key={game.id}
+            src={game.image.thumbnail.src}
+            alt={game.image.alt}
+            name={game.gameText}
+          />
+        })}
+      />}
+  </>
 };
 
 export default Page;
