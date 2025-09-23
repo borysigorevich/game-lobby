@@ -1,8 +1,9 @@
-import { getConfig } from "@/components/CategoryList/api/get-config";
 import { getGamesByCategory } from "@/app/[category]/_api/get-games-by-category";
+import { getConfig } from "@/components/CategoryList/api/get-config";
 import { GameCard } from "@/components/GameCard/GameCard";
 import { GameHeader } from "@/components/GameHeader/GameHeader";
 import { GamesList } from "@/components/GamesList/GamesList";
+import { EventProvider } from "@/providers/EventProvider";
 import React from 'react';
 
 interface PageProps {
@@ -45,9 +46,12 @@ const Page = async ({ params, searchParams }: PageProps) => {
 
   const filteredGames = search ? gameList.filter(game => game.gameText.toLowerCase().includes(search.toLowerCase())) : gameList
 
-  return <>
+  return <EventProvider games={filteredGames.map((game) => ({
+    id: game.id,
+    gameText: game.gameText
+  }))}>
     <GameHeader
-      title="Casino games lobby"
+      title={games.meta.title}
       totalGames={filteredGames.length || 0}
     />
     {gameList?.length === 0 ? <p>No games available</p> :
@@ -55,13 +59,14 @@ const Page = async ({ params, searchParams }: PageProps) => {
         content={filteredGames.map((game) => {
           return <GameCard
             key={game.id}
+            id={game.id}
             src={game.image.thumbnail.src}
             alt={game.image.alt}
             name={game.gameText}
           />
         })}
       />}
-  </>
+  </EventProvider>
 };
 
 export default Page;

@@ -1,4 +1,5 @@
 import { CategoryList } from "@/components/CategoryList/CategoryList";
+import { GameEvents } from "@/components/GameEvents/GameEvents";
 import { GridOverlay } from "@/components/GridOverlay/GridOverlay";
 import { Header } from "@/components/Header/Header";
 
@@ -33,6 +34,7 @@ const Layout = ({ children }: PropsWithChildren) => {
         </main>
       </div>
     </div>
+    <GameEvents/>
     </body>
     </html>
   );

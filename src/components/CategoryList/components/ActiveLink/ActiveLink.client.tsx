@@ -10,8 +10,6 @@ export const ActiveLink = (props: PropsWithChildren<LinkProps & { className?: st
 
   const pathname = usePathname()
 
-  console.log({ pathname, href: props.href })
-
   const decodedPathname = decodeURIComponent(pathname || '')
 
   const isActive = decodedPathname === props.href || (typeof props.href === 'string' && decodedPathname === '/' + props.href)

@@ -1,24 +1,17 @@
 'use client'
 import { useGameEvents } from "@/hooks/useGameEvents";
-import React from 'react';
 
-export const GameEvents = () => {
-  const gameEvents = useGameEvents()
+export interface EventGame {
+  id: string;
+  gameText: string
+}
 
-  return (
-    <div style={{ marginTop: "2rem", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
-      <h3>Live Game Events ({gameEvents.length})</h3>
-      {gameEvents.length === 0 ? (
-        <p>No events yet</p>
-      ) : (
-        <ul>
-          {gameEvents.map((event, index) => (
-            <li key={index} style={{ marginBottom: "0.5rem" }}>
-              {event.type}- Game ID: {event.gameId}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
+interface GameEventsProps {
+  games?: EventGame[]
+}
+
+export const GameEvents = ({ games }: GameEventsProps) => {
+  useGameEvents({ games })
+
+  return null
 };

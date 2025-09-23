@@ -1,4 +1,4 @@
-import { Search } from "@/components/GameCard/components/Search.client";
+import { Search } from "@/components/GameCard/components/Search/Search.client";
 import React from 'react';
 import s from './game-header.module.css'
 
