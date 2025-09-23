@@ -44,7 +44,7 @@ const Page = async ({ params, searchParams }: PageProps) => {
 
   const gameList = games?.components?.[0].games || []
 
-  const filteredGames = search ? gameList.filter(game => game.gameText.toLowerCase().includes(search.toLowerCase())) : gameList
+  const filteredGames = search?.trim() ? gameList.filter(game => game.gameText.toLowerCase().includes(search.toLowerCase())) : gameList
 
   return <EventProvider games={filteredGames.map((game) => ({
     id: game.id,
