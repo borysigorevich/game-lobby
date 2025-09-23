@@ -1,8 +1,11 @@
 import { CategoryList } from "@/components/CategoryList/CategoryList";
 import { GameEvents } from "@/components/GameEvents/GameEvents";
-import React, { PropsWithChildren, Suspense } from 'react';
+import { Header } from "@/components/Header/Header";
+
+import '../styles/globals.css';
 
 import { Inter } from 'next/font/google';
+import React, { PropsWithChildren, Suspense } from 'react';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -13,16 +16,15 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <html className={inter.className}>
     <body>
-    <div style={{ padding: "2rem" }}>
-      <h1>Casino Games Lobby</h1>
-      <Suspense
-        fallback={<p>Loading categories...</p>}
-      >
-        <CategoryList style={{ marginBottom: "2rem" }}/>
-      </Suspense>
-      {children}
-      <GameEvents/>
-    </div>
+    <Header/>
+    <h1>Casino Games Lobby</h1>
+    <Suspense
+      fallback={<p>Loading categories...</p>}
+    >
+      <CategoryList style={{ marginBottom: "2rem" }}/>
+    </Suspense>
+    {children}
+    <GameEvents/>
     </body>
     </html>
   );
