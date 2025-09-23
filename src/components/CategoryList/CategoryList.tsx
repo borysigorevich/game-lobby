@@ -1,6 +1,9 @@
 import { getConfig } from "@/components/CategoryList/api/get-config";
+import { ActiveLink } from "@/components/CategoryList/components/ActiveLink/ActiveLink";
 import Link from "next/link";
 import { CSSProperties } from 'react';
+
+import s from './category-list.module.css'
 
 interface CategoryListProps {
   className?: string;
@@ -22,18 +25,20 @@ export interface Category {
 export const CategoryList = async ({ className, style }: CategoryListProps) => {
   const { data: categories, error } = await getConfig()
 
+  console.log({ categories })
+
   return (
-    <div className={className} style={style}>
-      <h2>Game Categories</h2>
+    <div className={`${s.categoryList} ${className}`} style={style}>
+      <h3 className={s.categoryListTitle}>Categories</h3>
       {error ? (
         <p>Error loading categories</p>
       ) : (
-        <ul>
+        <ul className={s.categoryListItems}>
           {categories?.menu.lobby.items.map((category) => (
-            <li key={category.id}>
-              <Link href={category.name.en === 'Lobby' ? '/' : category.name.en} key={category.id}>
+            <li key={category.id} className={s.categoryListItem}>
+              <ActiveLink href={category.name.en === 'Lobby' ? '/' : category.name.en} key={category.id}>
                 {category.name.en}
-              </Link>
+              </ActiveLink>
             </li>
           ))}
         </ul>

@@ -17,6 +17,8 @@ export const GameCardByCategory = async ({ category, search }: GameCardByCategor
 
   const categoryUrl = link ? link.links.getPage.en : undefined
 
+  if(!categoryUrl) return <p>Category not found</p>
+
   const { data: games } = await getGamesByCategory({ url: categoryUrl })
 
   if(!games) return null

@@ -1,10 +1,10 @@
 import { CategoryList } from "@/components/CategoryList/CategoryList";
-import { GameEvents } from "@/components/GameEvents/GameEvents";
 import { Header } from "@/components/Header/Header";
 
 import '../styles/globals.css';
+import { Sidebar } from "@/components/Sidebar/Sidebar";
 
-import { Inter } from 'next/font/google';
+import { Inter, } from 'next/font/google';
 import React, { PropsWithChildren, Suspense } from 'react';
 
 const inter = Inter({
@@ -16,15 +16,19 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <html className={inter.className}>
     <body>
-    <Header/>
-    <h1>Casino Games Lobby</h1>
-    <Suspense
-      fallback={<p>Loading categories...</p>}
-    >
-      <CategoryList style={{ marginBottom: "2rem" }}/>
-    </Suspense>
-    {children}
-    <GameEvents/>
+    <div className={'wrapper'}>
+      <Header/>
+      <div className={'main-layout'}>
+        <Sidebar>
+          <Suspense
+            fallback={<p>Loading categories...</p>}
+          >
+            <CategoryList/>
+          </Suspense>
+        </Sidebar>
+        <main className={'main'}>{children}</main>
+      </div>
+    </div>
     </body>
     </html>
   );

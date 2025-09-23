@@ -8,7 +8,7 @@ interface GetGamesByCategoryProps {
 }
 
 interface GetGamesByCategoryResponse {
-  meta: {title: string }
+  meta: { title: string }
   components: {
     games: {
       gameText: string
@@ -25,24 +25,12 @@ interface GetGamesByCategoryResponse {
 
 
 export const getGamesByCategory = async ({ search, pageNumber, pageSize, url }: GetGamesByCategoryProps) => {
-  try {
-    const response = await apiFetch<GetGamesByCategoryResponse>('', {
-      searchParams: {
-        pageSize,
-        search,
-        pageNumber
-      },
-      baseUrl: url
-    })
-
-    return {
-      data: response?.data
-    }
-
-  } catch {
-    return {
-      error: 'Error loading games by category',
-      data: undefined
-    }
-  }
+  return await apiFetch<GetGamesByCategoryResponse>('', {
+    searchParams: {
+      pageSize,
+      search,
+      pageNumber
+    },
+    baseUrl: url
+  })
 }

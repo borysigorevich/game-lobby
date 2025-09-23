@@ -10,15 +10,5 @@ interface GetConfigResponse {
 }
 
 export const getConfig = async () => {
-  try {
-    const response = await apiFetch<GetConfigResponse>('/config')
-
-    return {
-      data: response?.data
-    }
-  } catch {
-    return {
-      error: 'Error loading categories',
-    }
-  }
+  return await apiFetch<GetConfigResponse>('/config')
 }

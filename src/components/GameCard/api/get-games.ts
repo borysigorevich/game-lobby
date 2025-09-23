@@ -12,23 +12,12 @@ interface GetGamesProps {
   pageSize?: string
 }
 
-export const getGames = async ({search, pageNumber, pageSize = '100'}: GetGamesProps = {}) => {
-  try {
-    const response = await apiFetch<GetGamesResponse>('/en/games', {
-      searchParams: {
-        pageSize,
-        search,
-        pageNumber
-      }
-    })
-
-    return {
-      data: response?.data
+export const getGames = async ({ search, pageNumber, pageSize = '100' }: GetGamesProps = {}) => {
+  return await apiFetch<GetGamesResponse>('/en/games', {
+    searchParams: {
+      pageSize,
+      search,
+      pageNumber
     }
-
-  } catch {
-    return {
-      data: { items: [], count: 0 },
-    }
-  }
+  })
 }
