@@ -11,6 +11,9 @@ export interface Game {
       thumbnail: {
         src: string
       }
+      original: {
+        src: string
+      }
     }
   }
 }

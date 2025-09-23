@@ -60,7 +60,7 @@ const Page = async ({ params, searchParams }: PageProps) => {
           return <GameCard
             key={game.id}
             id={game.id}
-            src={game.image.thumbnail.src}
+            src={game.image.original.src}
             alt={game.image.alt}
             name={game.gameText}
           />

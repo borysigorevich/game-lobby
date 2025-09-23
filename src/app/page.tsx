@@ -29,10 +29,11 @@ const Page = async ({ searchParams }: PageProps) => {
       {games?.count === 0 ? <p>No games available</p> :
         <GamesList
           content={games?.items.map((game) => {
+
             return <GameCard
               key={game.id}
               id={game.id}
-              src={game.media.thumbnail.thumbnail.src}
+              src={game.media.thumbnail.original.src}
               alt={game.meta.name}
               name={game.meta.name}
             />

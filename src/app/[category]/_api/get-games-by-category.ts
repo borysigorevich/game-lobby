@@ -17,6 +17,9 @@ interface GetGamesByCategoryResponse {
         thumbnail: {
           src: string
         }
+        original: {
+          src: string
+        }
       }
       id: string
     }[]
