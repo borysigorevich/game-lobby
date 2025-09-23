@@ -51,7 +51,7 @@ const Page = async ({ params, searchParams }: PageProps) => {
     gameText: game.gameText
   }))}>
     <GameHeader
-      title={games.meta.title}
+      title={games.meta.title || decodedCategory}
       totalGames={filteredGames.length || 0}
     />
     {gameList?.length === 0 ? <p>No games available</p> :
