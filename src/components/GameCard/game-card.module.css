@@ -1,12 +1,14 @@
 .gameCard {
     position: relative;
     border-radius: 20px;
-    /*max-height: 350px; !*TODO ??*!*/
     height: 100%;
-    /*overflow: hidden;*/
     display: grid;
     grid-template-rows: 1fr auto;
-    /*aspect-ratio: 1/1.37;*/
+    transition: translate 0.2s;
+}
+
+.gameCard:hover {
+    translate: 0 -10px;
 }
 
 .gameCardImage {
