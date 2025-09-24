@@ -20,10 +20,10 @@ export const Event = ({ gameId }: EventProps) => {
 
     let timeoutId: number
 
-    const lastEvent = events.at(-1)
+    const firstEvent = events.at(0)
 
-    if (lastEvent?.gameId === gameId) {
-      setType(lastEvent.type === 'POPULARITY_UPDATE' ? 'hot' : 'new')
+    if (firstEvent?.gameId === gameId) {
+      setType(firstEvent.type === 'POPULARITY_UPDATE' ? 'hot' : 'new')
 
       timeoutId = window.setTimeout(() => {
         setType(null)

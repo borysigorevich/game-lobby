@@ -18,6 +18,8 @@ export const EventProvider = ({ games, children }: PropsWithChildren<EventProvid
 
   const events = useGameEvents({ games })
 
+  console.log({events, games})
+
   return (
     <Context.Provider value={{ events }}>
       {children}
