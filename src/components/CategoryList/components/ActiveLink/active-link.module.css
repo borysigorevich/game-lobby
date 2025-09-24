@@ -2,11 +2,19 @@
     padding: 12px 24px;
     display: block;
     font-weight: 600;
-    transition: background-color 0.2s, color 0.2s;
+    transition: color 0.2s, opacity 0.2s, background-color 0.2s;
+    border-radius: 8px;
+    cursor: text;
+}
+
+.activeLink:hover {
+    opacity: 0.8;
+    background-color: var(--secondary-bg);
 }
 
 .active {
     background-color: var(--secondary-bg);
     color: var(--accent);
     border-radius: 8px;
+    font-weight: 700;
 }

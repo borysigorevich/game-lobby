@@ -4,7 +4,8 @@
 
 .categoryListTitle {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 700;
+    text-align: center;
 }
 
 .categoryListItems {
