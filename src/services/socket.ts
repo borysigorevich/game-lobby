@@ -21,7 +21,7 @@ class MockSocket {
 
             const event: GameEvent = { type, gameId: game.id, timestamp: Date.now() }
             this.listeners.forEach(cb => cb(event))
-        }, 3500)
+        }, 2700)
     }
 
     onMessage(callback: (event: GameEvent) => void) {
